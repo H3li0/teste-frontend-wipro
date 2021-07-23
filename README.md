@@ -1,4 +1,4 @@
-# teste-frontend-wipro
+# Teste de Frontend - WIPRO
 
 ## Project setup
 ```
