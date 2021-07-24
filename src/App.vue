@@ -1,95 +1,65 @@
 <template>
-  <div id="app">
-    <vue-bootstrap4-table :rows="rows" :columns="columns" :config="config">
-    </vue-bootstrap4-table>
+  <div id="app" class="container mt-5">
+    <Tabela :rows="rows" />
   </div>
 </template>
 
 <script>
-import VueBootstrap4Table from 'vue-bootstrap4-table';
+import Tabela from './components/Tabela.vue';
+import axios from 'axios';
+
+import {API_BASE_URL, CASES} from './utils';
+
 
 export default {
   name: 'App',
+  components: {
+    Tabela
+  },
   data: function() {
     return {
-      rows: [
-        {
-          "id": 1,
-          "name": {
-            "first_name": "Vladimir",
-            "last_name": "Nitzsche"
-          },
-          "address": {
-            "country": "Mayotte"
-          },
-          "email": "franecki.anastasia@gmail.com",
-        },
-        {
-          "id": 2,
-          "name": {
-            "first_name": "Irwin",
-            "last_name": "Bayer"
-          },
-          "age": 23,
-          "address": {
-            "country": "Guernsey"
-          },
-          "email": "rlittle@macejkovic.biz",
-        },
-        {
-          "id": 3,
-          "name": {
-            "first_name": "Don",
-            "last_name": "Herman"
-          },
-          "address": {
-            "country": "Papua New Guinea"
-          },
-          "email": "delia.becker@cormier.com",
-        }
-      ],
-      columns: [
-        {
-          label: "id",
-          name: "id",
-          filter: {
-            type: "simple",
-            placeholder: "id"
-          },
-          sort: true,
-        },
-        {
-          label: "First Name",
-          name: "name.first_name",
-          filter: {
-            type: "simple",
-            placeholder: "Enter first name"
-          },
-          sort: true,
-        },
-        {
-          label: "Email",
-          name: "email",
-          sort: true,
-        },
-        {
-          label: "Country",
-          name: "address.country",
-          filter: {
-            type: "simple",
-            placeholder: "Enter country"
-          },
-        }
-      ],
-      config: {
-        checkbox_rows: true,
-        rows_selectable: true,
-        card_title: "Vue Bootsrap 4 Advanced Table"
-      }
+      rows: [],
     }
   },
-  components: {
-    VueBootstrap4Table
+  mounted() {
+    this.fetchData();
+  },
+  methods: {
+    fetchData: function() {
+
+      let country;
+      let countries = [];
+      let idValue = 0;
+
+      axios.get(`${API_BASE_URL}${CASES}`)
+        .then(response => {
+          for (let [countryName, obj1] of Object.entries(response.data)) {
+
+            // if (countryName !== 'Global') {
+
+              for (let [nameAll, obj2] of Object.entries(obj1)) {
+
+                if (nameAll === 'All') {
+
+                  country = {
+                    id: ++idValue,
+                    pais: countryName,
+                    confirmados: obj2.confirmed,
+                    recuperados: obj2.recovered,
+                    mortes: obj2.deaths,
+                  };
+
+                  countries.push(country);
+                }
+
+              }
+              this.rows = countries;
+            // }
+
+          }
+        })
+        .catch(err => console.log(err));
+    }
   }
 }
 </script>
