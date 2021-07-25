@@ -36,7 +36,7 @@
 
       <!-- Botão de Reset -->
       <template slot="reset-button-text">
-        <i class="fas fa-broom"></i> Reset
+        <i class="fas fa-broom"></i> Resetar
       </template>
 
     </vue-bootstrap4-table>
@@ -45,6 +45,7 @@
 
 <script>
 import VueBootstrap4Table from 'vue-bootstrap4-table';
+import {EventBus} from '../utils/event-bus';
 
 export default {
   name: 'Tabela',
@@ -114,11 +115,10 @@ export default {
   },
   methods: {
     selecionaLinha: function(payload) {
-      console.log(`Id: ${payload.selected_item.id}`);
-      console.log(`País: ${payload.selected_item.pais}`);
-      console.log(`Casos: ${payload.selected_item.confirmados}`);
-      console.log(`Recuperados: ${payload.selected_item.recuperados}`);
-      console.log(`Mortes: ${payload.selected_item.mortes}`);
+      EventBus.$emit("tabela-clicked", {
+        nomePais: payload.selected_item.pais,
+        series: [payload.selected_item.confirmados, payload.selected_item.recuperados, payload.selected_item.mortes]
+      });
     }
   }
 }

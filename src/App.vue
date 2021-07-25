@@ -1,23 +1,35 @@
 <template>
   <div id="app" class="container mt-5">
-    <Tabela :rows="rows" />
+    <div class="row">
+      <div class="col">
+        <Grafico />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <Tabela :rows="rows" />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import Tabela from './components/Tabela.vue';
+import Grafico from './components/Grafico.vue';
 import axios from 'axios';
 
-import {API_BASE_URL, CASES} from './utils';
+import {API_BASE_URL, CASES} from './utils/constants';
 
 
 export default {
   name: 'App',
   components: {
-    Tabela
+    Tabela,
+    Grafico
   },
   data: function() {
     return {
+      // dadosGrafico: {},
       rows: [],
     }
   },
@@ -35,11 +47,9 @@ export default {
         .then(response => {
           for (let [countryName, obj1] of Object.entries(response.data)) {
 
-            // if (countryName !== 'Global') {
+            for (let [nameAll, obj2] of Object.entries(obj1)) {
 
-              for (let [nameAll, obj2] of Object.entries(obj1)) {
-
-                if (nameAll === 'All') {
+              if (countryName !== 'Global' && nameAll === 'All') {
 
                   country = {
                     id: ++idValue,
@@ -48,18 +58,22 @@ export default {
                     recuperados: obj2.recovered,
                     mortes: obj2.deaths,
                   };
-
+  
                   countries.push(country);
-                }
-
               }
-              this.rows = countries;
-            // }
+
+            }
+            this.rows = countries;
 
           }
         })
         .catch(err => console.log(err));
-    }
+    },
+    // pegarDadosGrafico: function(data) {
+    //   console.log('Dentro de pegarDadosGrafico():');
+    //   console.log(data);
+    //   // this.dadosGrafico = data;
+    // }
   }
 }
 </script>

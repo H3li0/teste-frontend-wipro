@@ -10,6 +10,8 @@
   "dependencies": {
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
+    "highcharts": "^9.1.2",
+    "highcharts-vue": "^1.4.0",
     "vue": "^2.6.11",
     "vue-bootstrap4-table": "^1.1.11"
   },
