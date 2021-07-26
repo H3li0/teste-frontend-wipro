@@ -13,8 +13,7 @@ export default {
     return {
       chartOptions: {
         chart: {
-          // renderTo: 'canvas',
-          type: 'area'
+          type: 'column',
         },
         title: {
             text: 'COVID-19: Estatística de Casos por País'
@@ -30,7 +29,13 @@ export default {
         series: [
           {
             name: 'País',
-            data: [0, 0, 0]
+            data: [0, 0, 0],
+            colorByPoint: true,
+            colors: [
+              '#FEA343',
+              '#0275d8',
+              '#d9534f',
+            ]
           }
         ],
         credits: {

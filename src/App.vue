@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="container mt-5">
-    <div class="row">
+    <div class="row mb-5">
       <div class="col">
         <Grafico />
       </div>
@@ -29,7 +29,6 @@ export default {
   },
   data: function() {
     return {
-      // dadosGrafico: {},
       rows: [],
     }
   },
@@ -69,11 +68,6 @@ export default {
         })
         .catch(err => console.log(err));
     },
-    // pegarDadosGrafico: function(data) {
-    //   console.log('Dentro de pegarDadosGrafico():');
-    //   console.log(data);
-    //   // this.dadosGrafico = data;
-    // }
   }
 }
 </script>
