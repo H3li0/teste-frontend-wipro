@@ -1,6 +1,6 @@
 # Teste de Frontend - WIPRO
 
-## Ferramentas usadas no projeto
+## Dependências do projeto
 
 * **_vue_** -- 2.6.11
 * **_axios_** -- 0.21.1
