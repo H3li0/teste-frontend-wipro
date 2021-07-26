@@ -2,10 +2,10 @@
 
 ## Ferramentas usadas no projeto
 
+* **_vue_** -- 2.6.11
 * **_axios_** -- 0.21.1
 * **_highcharts_** -- 9.1.2 
 * [**_highcharts-vue_**](https://github.com/highcharts/highcharts-vue) -- 1.4.0
-* **_vue_** -- 2.6.11
 * [**_vue-bootstrap4-table_**](https://github.com/rubanraj54/vue-bootstrap4-table) - 1.1.11
 
 
